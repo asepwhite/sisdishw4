@@ -8,7 +8,7 @@ function init_publisher(){
 
       var ex = 'EX_PING';
       var currTime = new Date(Date.now());
-      currTime = moment(dateTime).format("YYYY-MM-DD HH:mm:ss");
+      currTime = moment(currTime).format("YYYY-MM-DD HH:mm:ss");
       var msg = '[x] {"action":"ping","npm":"1406623064","ts":"'+currTime+'"}';
       ch.assertExchange(ex, 'fanout', {durable: false});
       setTimeout(function() {
