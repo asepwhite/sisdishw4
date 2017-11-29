@@ -8,7 +8,7 @@ const sequelize = new Sequelize('sisdis', 'root', 'rootroot', {
 });
 const Pings = sequelize.define('pings', {
   npm: { type: Sequelize.INTEGER,  primaryKey: true },
-  time: Sequelize.DATE
+  time: { type: Sequelize.INTEGER}
 });
 
 function init_consumer() {
@@ -28,7 +28,7 @@ function init_consumer() {
           console.log("======")
           try{
             var message = JSON.parse(strMessage)
-            Pings.findOrCreate({where: {npm: message.npm}, defaults: {ts: message.ts}})
+            Pings.findOrCreate({where: {npm: message.npm}, defaults: {time: message.ts}})
             console.log(message)
           } catch(e) {
             console.log("error parsing JSON")
