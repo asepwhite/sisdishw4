@@ -24,8 +24,9 @@ function init_consumer() {
 
         ch.consume(q.queue, function(msg) {
           var strMessage = msg.content.toString();
-          var messsage = JSON.parse(strMessage)
-          Pings.findOrCreate({where: {npm: message.npm}, defaults: {ts: message.ts}})
+          var message = JSON.parse(strMessage)
+          console.log(messsage)
+          // Pings.findOrCreate({where: {npm: message.npm}, defaults: {ts: message.ts}})
           console.log(msg.content.toString());
         }, {noAck: true});
       });
