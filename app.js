@@ -10,6 +10,9 @@ var users = require('./routes/users');
 
 var app = express();
 
+var consumer = require('./consumer.js')
+var publisher = require('./publisher.js')
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -44,6 +47,8 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen('3000', function(){
+  consumer()
+  publisher()
   console.log("Running on port 3000")
 })
 
