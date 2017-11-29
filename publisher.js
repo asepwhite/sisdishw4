@@ -11,15 +11,16 @@ function init_publisher(){
       currTime = moment(currTime).format("YYYY-MM-DD HH:mm:ss");
       var msg = '[x] {"action":"ping","npm":"1406623064","ts":"'+currTime+'"}';
       ch.assertExchange(ex, 'fanout', {durable: false});
-      sendPing(ch);
+      sendPing(ch, ex);
     });
 
   });
 
 }
 
-function sendPing(ch){
+function sendPing(ch, ex){
   setTimeout(function() {
+    console.log("publish message")
     ch.publish(ex, '', new Buffer(msg));
    }, 500);
 }
