@@ -8,7 +8,7 @@ const sequelize = new Sequelize('sisdis', 'root', 'rootroot', {
 });
 const Pings = sequelize.define('pings', {
   npm: { type: Sequelize.INTEGER,  primaryKey: true },
-  time: { type: Sequelize.INTEGER}
+  time: { type: Sequelize.DATE}
 });
 
 function init_consumer() {
