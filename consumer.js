@@ -1,6 +1,15 @@
 #!/usr/bin/env node
 
 var amqp = require('amqplib/callback_api');
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('sisdis', 'root', 'rootroot', {
+  host: 'localhost',
+  dialect: 'mysql'
+});
+const Pings = sequelize.define('pings', {
+  npm: { type: Sequelize.INTEGER,  unique: true },
+  time: Sequelize.DATE
+});
 
 function init_consumer() {
   amqp.connect('amqp://sisdis:sisdis@172.17.0.3:5672', function(err, conn) {
@@ -14,7 +23,9 @@ function init_consumer() {
         ch.bindQueue(q.queue, ex, '');
 
         ch.consume(q.queue, function(msg) {
-          console.log(" [x] %s", msg.content.toString());
+          var strMessage = msg.content.toString();
+          var messsage = JSON.parse(strMessage)
+          console.log(msg.content.toString());
         }, {noAck: true});
       });
     });
