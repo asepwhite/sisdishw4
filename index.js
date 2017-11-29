@@ -11,6 +11,7 @@ amqp.connect('amqp://sisdis:sisdis@172.17.0.3:5672', function(err, conn) {
     ch.publish(ex, '', new Buffer(msg));
     console.log(" [x] Sent %s", msg);
   });
+  console.log("HUHEUEHEUEU")
 
-  setTimeout(function() { conn.close(); process.exit(0) }, 1);
+  // setTimeout(function() { conn.close(); process.exit(0) }, 500);
 });
