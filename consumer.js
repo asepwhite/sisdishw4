@@ -26,11 +26,14 @@ function init_consumer() {
           var strMessage = msg.content.toString();
           console.log(msg.content.toString());
           console.log("======")
-          var message = JSON.parse(strMessage)
-          console.log(message)
+          try{
+            var message = JSON.parse(strMessage)
+            Pings.findOrCreate({where: {npm: message.npm}, defaults: {ts: message.ts}})
+            console.log(message)
+          } catch(e) {
+            console.log("error parsing JSON")
+          }
           console.log("******")
-          // Pings.findOrCreate({where: {npm: message.npm}, defaults: {ts: message.ts}})
-          // console.log(msg.content.toString());
         }, {noAck: true});
       });
     });
