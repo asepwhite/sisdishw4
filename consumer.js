@@ -7,7 +7,7 @@ const sequelize = new Sequelize('sisdis', 'root', 'rootroot', {
   dialect: 'mysql'
 });
 const Pings = sequelize.define('pings', {
-  npm: { type: Sequelize.INTEGER,  unique: true },
+  npm: { type: Sequelize.INTEGER,  primaryKey: true },
   time: Sequelize.DATE
 });
 
