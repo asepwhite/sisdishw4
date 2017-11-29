@@ -17,5 +17,7 @@ function init_publisher(){
   });
 }
 
+init_publisher()
+
 var publisher = init_publisher;
 module.exports = publisher

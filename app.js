@@ -48,7 +48,7 @@ app.use(function(err, req, res, next) {
 
 app.listen('3000', function(){
   consumer()
-  publisher()
+  // publisher()
   console.log("Running on port 3000")
 })
 
