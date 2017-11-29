@@ -24,10 +24,11 @@ function init_consumer() {
 
         ch.consume(q.queue, function(msg) {
           var strMessage = msg.content.toString();
-          var message = JSON.parse(strMessage)
           console.log(msg.content.toString());
           console.log("======")
-          console.log(messsage)
+          var message = JSON.parse(strMessage)
+          console.log(message)
+          console.log("******")
           // Pings.findOrCreate({where: {npm: message.npm}, defaults: {ts: message.ts}})
           // console.log(msg.content.toString());
         }, {noAck: true});
