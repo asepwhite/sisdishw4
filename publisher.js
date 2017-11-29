@@ -1,23 +1,23 @@
 var amqp = require('amqplib/callback_api');
+var moment = require('moment')
 
 function init_publisher(){
   amqp.connect('amqp://sisdis:sisdis@172.17.0.3:5672', function(err, conn) {
     console.log(conn)
     conn.createChannel(function(err, ch) {
-      console.log("berhasil create channel")
-      var ex = 'EX_PING';
-      var msg = process.argv.slice(2).join(' ') || 'Hello World!';
 
+      var ex = 'EX_PING';
+      var currTime = new Date(Date.now());
+      currTime = moment(dateTime).format("YYYY-MM-DD HH:mm:ss");
+      var msg = '[x] {"action":"ping","npm":"1406623064","ts":"'+currTime+'"}';
       ch.assertExchange(ex, 'fanout', {durable: false});
-      ch.publish(ex, '', new Buffer(msg));
-      console.log(" [x] Sent %s", msg);
+      setTimeout(function() {
+        ch.publish(ex, '', new Buffer(msg));
+       }, 500);
     });
 
-    setTimeout(function() { conn.close(); process.exit(0) }, 500);
   });
 }
-
-init_publisher()
 
 var publisher = init_publisher;
 module.exports = publisher
